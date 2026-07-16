@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENGR. Sheila Marie I. Benito | Portfolio</title>
+    <style>
+        /* 
+           Color Palette derived from image_fb9123.png 
+           --light: #F5EBE0
+           --soft-peach: #EDC7B7
+           --accent-peach: #D6A692
+           --muted-tan: #BC9985
+           --deep-brown: #A1826D
+        */
+        :root {
+            --bg-color: #F5EBE0;
+            --secondary: #EDC7B7;
+            --accent: #88472b;
+            --text-color: #000000;
+            --card-bg: rgba(255, 255, 255, 0.4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        img { max-width: 100%; display: block; }
+        body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Lora', 'Georgia', serif; line-height: 1.7; }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', 'Didot', 'Bodoni MT', serif; letter-spacing: 0.05em; }
+
+        /* Navigation */
+        nav { padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000; }
+        .nav-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 14px 20px; }
+        nav a { text-decoration: none; color: var(--text-color); font-weight: 600; transition: 0.3s; }
+        nav a:hover { color: var(--accent); }
+
+        section { padding: 80px 10%; }
+        h1, h2 { color: var(--deep-brown); margin-bottom: 20px; }
+
+        /* Home Section */
+        #home {
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 0;
+            margin: 0;
+            padding: 0;
+        }
+        #home::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.2) 100%);
+            z-index: 1;
+        }
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            animation: heroFade 16s infinite;
+        }
+        .hero-slide:nth-child(1) { background-image: url('slide1.jpeg'); animation-delay: 0s; }
+        .hero-slide:nth-child(2) { background-image: url('slide2.jpeg'); animation-delay: 4s; }
+        .hero-slide:nth-child(3) { background-image: url('slide3.jpeg'); animation-delay: 8s; }
+        @keyframes heroFade {
+            0%, 100% { opacity: 0; }
+            2%, 33% { opacity: 1; }
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            width: min(1280px, 92vw);
+            padding: 0 20px;
+        }
+        .hero-text {
+            max-width: 850px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(12px);
+            padding: 40px 45px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.35);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        }
+        .hero-photo {
+            width: 340px;
+            height: 470px;
+            object-fit: contain; /* Changed from cover to contain */
+            background-color: #F5EBE0; /* Optional: Sets the background color of the gaps */
+            border-radius: 24px;
+            border: 2px solid rgba(255,255,255,0.35);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+            flex-shrink: 0;
+            }
+        .hero-text p { color: #f6efe9; font-size: 1.05rem; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px; }
+        .hero-text h1 { font-size: 3rem; line-height: 1.1; color: #fffdf9; margin-bottom: 18px; white-space: nowrap; }
+        .roles { font-weight: bold; font-size: 1.05rem; line-height: 1.7; letter-spacing: 1px; color: #f8d8c3; }
+        .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; }
+        .tool-box img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 10px; }
+        .tool-box { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 16px; text-align: center; }
+        .proj-box img { width: 100%; height: 60%; object-fit: cover; border-radius: 12px; margin-bottom: 12px; }
+
+        /* Services Section */
+        .grid-services { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+        .card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.3);
+            min-height: 360px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: transform 0.5s ease, box-shadow 0.3s ease, border-color 0.3s ease, opacity 0.5s ease;
+        }
+        .card.visible { opacity: 1; transform: translateY(0); }
+        .card:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 16px 35px rgba(0,0,0,0.15); border-color: rgba(136, 71, 43, 0.4); }
+        .card img { transition: transform 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease; }
+        .card.visible img { transform: scale(1.02); filter: brightness(1.04) saturate(1.05); box-shadow: 0 10px 22px rgba(0,0,0,0.16); }
+        .card:hover img { transform: scale(1.05); filter: brightness(1.05) saturate(1.08); box-shadow: 0 10px 22px rgba(0,0,0,0.16); }
+
+        /* Expertise Section */
+        .grid-expertise { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 15px; }
+        .tool-box { background: var(--secondary); min-height: 140px; border-radius: 10px; padding: 0; overflow: hidden; opacity: 0; transform: translateY(25px); transition: transform 0.5s ease, opacity 0.5s ease; }
+        .tool-box.visible { opacity: 1; transform: translateY(0); }
+        .tool-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 0; margin-bottom: 0; transition: transform 0.3s ease, filter 0.3s ease; }
+        .tool-box:hover img { transform: scale(1.05); filter: brightness(1.05) saturate(1.05); }
+
+        #about { display: flex; align-items: center; gap: 50px; }
+        #about > div { background: var(--card-bg); padding: 40px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(5px); }
+        #about h2 { font-size: 2.5rem; color: var(--deep-brown); margin-bottom: 25px; }
+        #about p { font-size: 1.15rem; line-height: 1.8; color: var(--text-color); margin-bottom: 20px; }
+        .about-img { width: 350px; aspect-ratio: 9/16; object-fit: cover; border-radius: 20px; box-shadow: 10px 10px 30px rgba(0,0,0,0.1); flex-shrink: 0; display: block; opacity: 0; transform: translateY(25px); transition: transform 0.5s ease, opacity 0.5s ease; }
+        .about-img.visible { opacity: 1; transform: translateY(0); }
+        .resume-btn {
+            display: inline-block;
+            padding: 12px 22px;
+            margin-top: 10px;
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 999px;
+            font-weight: 700;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+        .resume-btn:hover { transform: translateY(-2px); background: #6f371d; }
+
+        /* Projects Section */
+        .grid-projects { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+        .proj-box { background: var(--card-bg); border-radius: 15px; padding: 20px; border: 1px solid rgba(255,255,255,0.3); display: flex; flex-direction: column; gap: 12px; opacity: 0; transform: translateY(25px); transition: transform 0.5s ease, opacity 0.5s ease; }
+        .proj-box.visible { opacity: 1; transform: translateY(0); }
+        .proj-title { color: var(--deep-brown); font-weight: 700; font-size: 1rem; text-transform: uppercase; }
+        .proj-box img { width: 100%; height: 220px; object-fit: cover; border-radius: 12px; cursor: pointer; transition: transform 0.3s ease, filter 0.3s ease; }
+        .proj-box img:hover { transform: scale(1.02); filter: brightness(1.02); }
+        .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; z-index: 2000; padding: 20px; }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 90vw; max-height: 85vh; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+
+        /* Testimonials Section */
+        .grid-testimonials { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+        .testimonial-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.3);
+            min-height: 260px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: transform 0.5s ease, box-shadow 0.3s ease, border-color 0.3s ease, opacity 0.5s ease;
+        }
+        .testimonial-card.visible { opacity: 1; transform: translateY(0); }
+        .testimonial-card:hover { transform: translateY(-8px) scale(1.01); box-shadow: 0 16px 35px rgba(0,0,0,0.15); border-color: rgba(136, 71, 43, 0.4); }
+        .testimonial-card .quote { font-size: 1.05rem; line-height: 1.8; color: var(--text-color); margin-bottom: 20px; font-style: italic; }
+        .testimonial-card h3 { color: var(--deep-brown); margin-bottom: 6px; }
+        .testimonial-card .client-role { color: var(--accent); font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.85rem; }
+
+        /* Contact Section */
+        #contact { text-align: center; background: var(--secondary); padding: 50px; border-radius: 20px; margin: 0 10%; }
+
+        @media (max-width: 1024px) {
+            section { padding: 70px 6%; }
+            .hero-content { flex-direction: column; text-align: center; }
+            .hero-photo { width: min(280px, 70vw); height: auto; max-height: 420px; }
+            .hero-text h1 { font-size: 2.3rem; white-space: normal; }
+            .hero-text { padding: 32px 28px; }
+            #about { flex-direction: column; align-items: stretch; }
+            .about-img { width: min(320px, 80vw); margin: 0 auto; }
+            .grid-services, .grid-projects, .grid-testimonials { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .grid-expertise { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            #contact { margin: 0 5%; padding: 40px 24px; }
+        }
+
+        @media (max-width: 768px) {
+            nav { justify-content: center; text-align: center; }
+            .nav-links { justify-content: center; }
+            section { padding: 60px 5%; }
+            .hero-text p { font-size: 0.95rem; letter-spacing: 0.12em; }
+            .hero-text h1 { font-size: 1.9rem; }
+            .hero-text .roles { font-size: 0.95rem; }
+            .grid-services, .grid-projects, .grid-testimonials, .grid-expertise { grid-template-columns: 1fr; }
+            .card, .proj-box, .testimonial-card, .tool-box { min-height: auto; }
+            .about-img { width: 100%; max-width: 320px; }
+            #about > div { padding: 28px; }
+            #about h2 { font-size: 2rem; }
+            #about p { font-size: 1rem; }
+        }
+
+        @media (max-width: 480px) {
+            nav { padding: 14px 16px; }
+            .nav-links { gap: 10px 14px; }
+            .hero-text { padding: 24px 18px; }
+            .hero-text h1 { font-size: 1.6rem; }
+            .hero-text .roles { font-size: 0.9rem; line-height: 1.6; }
+            section { padding: 50px 4%; }
+            .card, .proj-box, .testimonial-card { padding: 20px; }
+            #contact { margin: 0 4%; padding: 32px 18px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">SMB</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#expertise">Expertise</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section id="home">
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-slide"></div>
+        <div class="hero-content">
+            <img src="home.jpg" alt="Sheila Marie Benito" class="hero-photo">
+            <div class="hero-text">
+                <p>PROFESSIONAL PORTFOLIO</p>
+                <h1>ENGR. SHEILA MARIE I. BENITO</h1>
+                <p class="roles">REAL ESTATE ACQUISITION SPECIALIST | EXECUTIVE VA | APPOINTMENT SETTER | COLD CALLER | LEAD GENERATION & RESEARCH SPECIALIST | CUSTOMER SERVICE EXPERT</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <img src="me.jpeg" alt="Sheila Marie Benito" class="about-img">
+        <div>
+            <h2>ABOUT ME</h2>
+            <p>Hi! You can call me, Sheila. I am 25 years old based in Davao City, Philippines. I am a licensed Agricultural and Biosystems Engineer in the Philippines.</p>
+            <br>
+            <p>Helping US businesses organize and scale through expert lead management, data research, and appointment setting. I bring a proactive, detail-first approach to every task, ensuring seamless communication and accurate results for your daily operations.</p>
+            <a href="https://drive.google.com/drive/folders/1XfFQmQd0LZaQ7wI6F2WmWZyQyw3JvK1o?usp=sharing" class="resume-btn" target="_blank" rel="noopener noreferrer">Resume</a>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2>Services</h2>
+        <div class="grid-services">
+            <div class="card"><img src="service1.jpeg" alt="Customer Support"><h3>Customer Support</h3><p>Provided professional customer support through email, chat, and phone by resolving inquiries, handling requests, and delivering timely, customer-focused solutions.</p></div>
+            <div class="card"><img src="service2.jpeg" alt="Cold Calling & Appointment Setting"><h3>Cold Calling & Appointment Setting</h3><p>Conducted cold calls, qualified prospects, and scheduled appointments while maintaining professional communication and accurate records to support sales and business growth.</p></div>
+            <div class="card"><img src="service3.jpeg" alt="Lead Generation"><h3>Lead Generation</h3><p>Generated qualified leads through online research, prospecting, and data collection while maintaining accurate contact lists and supporting client outreach efforts.</p></div>
+            <div class="card"><img src="service4.jpg" alt="Administrative Support"><h3>Administrative Support</h3><p>Provided administrative support by managing emails, calendars, documents, scheduling, data organization, and other day-to-day tasks to ensure efficient business operations.</p></div>
+            <div class="card"><img src="service5.jpeg" alt="Data Entry and Research"><h3>Data Entry and Research</h3><p>Performed accurate data entry, online research, data verification, and record management while maintaining organized databases and delivering reliable, detail-oriented results.</p></div>
+            <div class="card"><img src="service6.jpeg" alt="Email and Calendar Management"><h3>Real Estate Virtual Assistant</h3><p>Provided administrative support to real estate professionals by managing CRM systems, coordinating appointments, organizing property listings, conducting market research, generating leads, and maintaining accurate client records.</p></div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Sample Works</h2>
+        <div class="grid-projects">
+            <div class="proj-box">
+                <div class="proj-title">DATA ENTRY AND RESEARCH</div>
+                <img src="project1.jpeg" alt="Data Entry and Research" onclick="openLightbox('project1.jpeg', ['project1.jpeg'])">
+            </div>
+            <div class="proj-box">
+                <div class="proj-title">COLD CALLING & APPOINTMENT SETTING</div>
+                <img src="project1.jpeg" alt="Cold Calling and Appointment Setting" onclick="openLightbox('project1.jpeg', ['project1.jpeg'])">
+            </div>
+            <div class="proj-box">
+                <div class="proj-title">LEAD GENERATION</div>
+                <img src="project1.jpeg" alt="Lead Generation" onclick="openLightbox('project1.jpeg', ['project1.jpeg'])">
+            </div>
+            <div class="proj-box">
+                <div class="proj-title">ADMINISTRATIVE SUPPORT</div>
+                <img src="project1.jpeg" alt="Administrative Support" onclick="openLightbox('project1.jpeg', ['project1.jpeg'])">
+            </div>
+            <div class="proj-box">
+                <div class="proj-title">CUSTOMER SERVICE</div>
+                <img src="project1.jpeg" alt="Customer Service" onclick="openLightbox('project1.jpeg', ['project1.jpeg'])">
+            </div>
+            <div class="proj-box">
+                <div class="proj-title">VIRTUAL ASSISTANT SUPPORT</div>
+                <img src="project1.jpeg" alt="Virtual Assistant Support" onclick="openLightbox('project1.jpeg', ['project1.jpeg'])">
+            </div>
+        </div>
+    </section>
+
+    <section id="expertise">
+        <h2>Software</h2>
+        <div class="grid-expertise">
+            <div class="tool-box"><img src="tool1.png" alt="Tool 1"></div><div class="tool-box"><img src="tool2.png" alt="Tool 2"></div><div class="tool-box"><img src="tool3.png" alt="Tool 3"></div><div class="tool-box"><img src="tool4.png" alt="Tool 4"></div>
+            <div class="tool-box"><img src="tool5.png" alt="Tool 5"></div><div class="tool-box"><img src="tool6.png" alt="Tool 6"></div><div class="tool-box"><img src="tool7.png" alt="Tool 7"></div><div class="tool-box"><img src="tool8.png" alt="Tool 8"></div>
+            <div class="tool-box"><img src="tool9.png" alt="Tool 9"></div><div class="tool-box"><img src="tool10.png" alt="Tool 10"></div><div class="tool-box"><img src="tool11.png" alt="Tool 11"></div><div class="tool-box"><img src="tool12.png" alt="Tool 12"></div>
+            <div class="tool-box"><img src="tool13.png" alt="Tool 13"></div><div class="tool-box"><img src="tool14.png" alt="Tool 14"></div><div class="tool-box"><img src="tool15.png" alt="Tool 15"></div>
+        </div>
+    </section>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <img id="lightbox-img" src="" alt="Expanded project preview">
+    </div>
+
+    <script>
+        const revealItems = document.querySelectorAll('.card, .tool-box, .proj-box, .about-img, .testimonial-card');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        revealItems.forEach((item, index) => {
+            item.style.transitionDelay = `${index * 0.08}s`;
+            revealObserver.observe(item);
+        });
+
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+    </script>
+
+    <section id="testimonials">
+        <h2>Testimonials</h2>
+        <div class="grid-testimonials">
+            <div class="testimonial-card">
+                <p class="quote">“Sheila is incredibly organized, reliable, and always attentive to details. She made our daily operations smoother and helped us stay on top of everything.”</p>
+                <h3>Maria D.</h3>
+                <p class="client-role">Small Business Owner</p>
+            </div>
+            <div class="testimonial-card">
+                <p class="quote">“Professional, responsive, and proactive. She handled lead follow-ups and research with great accuracy and communication.”</p>
+                <h3>James R.</h3>
+                <p class="client-role">Real Estate Consultant</p>
+            </div>
+            <div class="testimonial-card">
+                <p class="quote">“A dependable virtual assistant who brings energy and structure to every task. She is a true asset to any team.”</p>
+                <h3>Anna S.</h3>
+                <p class="client-role">Operations Manager</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>let’s work together!</h2>
+        <p>Email: sheilamariebenito@gmail.com</p>
+        <p>Phone: +63 994 483 7154</p>
+        <p><a href="https://www.linkedin.com/in/sheila-marie-benito-864929284/">LinkedIn Profile</a></p>
+    </section>
+
+</body>
+</html>
